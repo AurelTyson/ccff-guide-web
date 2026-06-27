@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 import BottomNav from './BottomNav'
 import UpdateToast from './UpdateToast'
@@ -7,13 +7,14 @@ import { titleForPath } from '../content/sections'
 export default function AppShell() {
   const location = useLocation()
   const navigate = useNavigate()
+  const mainRef = useRef<HTMLElement>(null)
   const isHome = location.pathname === '/' || location.pathname === ''
   const title = isHome
     ? 'Guide du Bénévole CCFF'
     : (titleForPath(location.pathname) ?? 'Guide CCFF')
 
   useEffect(() => {
-    window.scrollTo(0, 0)
+    mainRef.current?.scrollTo(0, 0)
   }, [location.pathname])
 
   return (
@@ -33,7 +34,7 @@ export default function AppShell() {
         </div>
       </header>
 
-      <main className="main">
+      <main className="main" ref={mainRef}>
         <Outlet />
       </main>
 
