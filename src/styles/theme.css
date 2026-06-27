@@ -59,7 +59,7 @@
 
   /* Layout */
   --header-h: 56px;
-  --nav-h: 64px;
+  --nav-h: 52px; /* tappable row; native iOS tab bar is ~49pt */
   --maxw: 720px;
 
   /* Safe areas */

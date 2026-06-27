@@ -151,10 +151,10 @@ a {
   font-size: var(--fs-xs);
   font-weight: 600;
   text-decoration: none;
-  padding: 6px 2px;
+  padding: 4px 2px;
 }
 .nav__item .nav__icon {
-  font-size: 1.45rem;
+  font-size: 1.4rem;
   line-height: 1;
 }
 .nav__item.is-active {
