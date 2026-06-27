@@ -129,7 +129,11 @@ a {
   z-index: 20;
   background: var(--surface);
   border-top: 1px solid var(--border);
-  padding-bottom: var(--safe-bottom);
+  /* In standalone iOS, the home-indicator inset is ~34px and would leave a
+     tall empty band under the bar. Cap it to a slim clearance so the bar reads
+     compact (like Safari, where the inset is ~0) while labels still clear the
+     home indicator. */
+  padding-bottom: min(var(--safe-bottom), 8px);
   box-shadow: 0 -2px 10px rgba(20, 30, 15, 0.06);
 }
 .nav__inner {
