@@ -41,12 +41,16 @@ a {
 }
 
 /* ----- App shell ----- */
-/* Fixed-height flex column: header / scrollable content / nav. The content area
-   scrolls internally so the bottom nav stays put — this avoids the iOS Safari
-   `position: fixed` offset bug after the virtual keyboard is dismissed. */
+/* Pin the shell to the real viewport edges (not 100dvh, which can leave a
+   sliver against the iOS safe area / toolbar). Header / scrollable content /
+   in-flow nav as a flex column — nothing position:fixed at bottom:0, so the
+   nav can't drift after the keyboard is dismissed. */
 .app {
-  height: 100vh; /* fallback */
-  height: 100dvh;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
   display: flex;
   flex-direction: column;
   overflow: hidden;
