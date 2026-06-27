@@ -7,6 +7,7 @@ import Debroussaillement from './routes/Debroussaillement'
 import EmploiDuFeu from './routes/EmploiDuFeu'
 import SecuriteLargage from './routes/SecuriteLargage'
 import EchelleRisques from './routes/EchelleRisques'
+import Vigilance from './routes/Vigilance'
 import AlphabetPhonetique from './routes/AlphabetPhonetique'
 import Epeleur from './routes/Epeleur'
 import Glossaire from './routes/Glossaire'
@@ -27,6 +28,7 @@ export default function App() {
         <Route path="emploi-du-feu" element={<EmploiDuFeu />} />
         <Route path="securite-largage" element={<SecuriteLargage />} />
         <Route path="echelle-de-risques" element={<EchelleRisques />} />
+        <Route path="vigilance" element={<Vigilance />} />
         <Route path="alphabet" element={<AlphabetPhonetique />} />
         <Route path="epeleur" element={<Epeleur />} />
         <Route path="glossaire" element={<Glossaire />} />
