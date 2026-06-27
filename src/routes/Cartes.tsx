@@ -1,53 +1,34 @@
-import { useEffect, useState } from 'react'
 import { asset } from '../lib/asset'
 
 const VIGILANCE_URL = 'https://www.risque-prevention-incendie.fr/herault/'
+const VIGILANCE_IMG = asset('maps/carte-prevention-incendie.png')
 const DFCI_MAP = asset('maps/carroyage-dfci.jpg')
 
 export default function Cartes() {
-  const [online, setOnline] = useState(
-    typeof navigator === 'undefined' ? true : navigator.onLine,
-  )
-
-  useEffect(() => {
-    const goOnline = () => setOnline(true)
-    const goOffline = () => setOnline(false)
-    window.addEventListener('online', goOnline)
-    window.addEventListener('offline', goOffline)
-    return () => {
-      window.removeEventListener('online', goOnline)
-      window.removeEventListener('offline', goOffline)
-    }
-  }, [])
-
   return (
     <div className="page">
       <section>
         <h2>Vigilance incendie de forêt</h2>
-        <p className="note">
-          Information journalière des services de l’État de l’Hérault (mise à
-          jour vers 18 h).{' '}
-          <a href={VIGILANCE_URL} target="_blank" rel="noopener noreferrer">
-            Ouvrir le site officiel ↗
-          </a>
-        </p>
-        {online ? (
-          <div className="map-embed">
-            <iframe
-              src={VIGILANCE_URL}
-              title="Carte de vigilance incendie de forêt — Hérault"
-              loading="lazy"
-            />
-          </div>
-        ) : (
-          <div className="callout callout--warn">
-            <div className="callout__title">📡 Connexion requise</div>
+        <a
+          className="map-card"
+          href={VIGILANCE_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            className="map-card__img"
+            src={VIGILANCE_IMG}
+            alt="Carte de vigilance incendie de forêt — Hérault"
+            loading="lazy"
+          />
+          <div className="map-card__cap">
+            <h3>Information journalière (Hérault)</h3>
             <p>
-              Cette carte est mise à jour en direct et nécessite une connexion
-              internet.
+              Carte indicative. Touchez pour la vigilance du jour — risque et
+              accès aux massifs — sur le site officiel (mise à jour vers 18 h) ↗
             </p>
           </div>
-        )}
+        </a>
       </section>
 
       <section>

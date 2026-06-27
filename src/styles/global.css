@@ -623,7 +623,6 @@ tbody tr:last-child td {
   height: auto;
   display: block;
   background: #eee;
-  cursor: zoom-in;
 }
 .map-card__cap {
   padding: var(--sp-3) var(--sp-4);
@@ -634,23 +633,6 @@ tbody tr:last-child td {
 .map-card__cap p {
   font-size: var(--fs-sm);
   color: var(--text-muted);
-}
-
-/* Live page embed (vigilance, in Cartes) */
-.map-embed {
-  height: 70vh;
-  min-height: 360px;
-  border: 1px solid var(--border);
-  border-radius: var(--r-md);
-  overflow: hidden;
-  background: var(--surface);
-  box-shadow: var(--shadow-sm);
-}
-.map-embed iframe {
-  width: 100%;
-  height: 100%;
-  border: 0;
-  display: block;
 }
 
 /* ----- Search ----- */
