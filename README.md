@@ -12,7 +12,13 @@ et consultation sans réseau une fois la page ouverte.
 
 Urgence & départ de feu · Missions · Débroussaillement · Emploi du feu ·
 Échelle de risques · Sécurité largage · Cartes (zones météo + carroyage DFCI) ·
-Alphabet phonétique · Glossaire des acronymes · Recherche · À propos.
+Alphabet phonétique · Épeleur radio · Glossaire des acronymes · Recherche ·
+Installer l'application · Réglages d'affichage · À propos.
+
+Outils de terrain : recherche plein-texte, **épeleur radio** (dicte un mot ou
+une plaque en alphabet phonétique), **réglages d'affichage** (texte agrandi,
+contraste « plein soleil ») et **installation** sur l'écran d'accueil pour un
+usage hors-ligne.
 
 > Le contenu est transcrit de l'édition **Mars 2015** (« 37 CCFF en 2015 »).
 > Vérifiez la validité des numéros, arrêtés et procédures auprès de votre commune,
