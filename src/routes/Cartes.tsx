@@ -1,57 +1,78 @@
-import { useState } from 'react'
-import ImageViewer from '../components/ImageViewer'
+import { useEffect, useState } from 'react'
 import { asset } from '../lib/asset'
 
-interface MapItem {
-  src: string
-  title: string
-  caption: string
-}
-
-const MAPS: MapItem[] = [
-  {
-    src: asset('maps/zones-meteo.jpg'),
-    title: 'Les 8 zones météo de l’Hérault',
-    caption:
-      'Découpage 34-1 à 34-8 utilisé pour le niveau de risque quotidien.',
-  },
-  {
-    src: asset('maps/carroyage-dfci.jpg'),
-    title: 'Carroyage DFCI',
-    caption: 'Coordonnées DFCI — échelle 1/25 000 (1 cm = 250 m).',
-  },
-]
+const VIGILANCE_URL = 'https://www.risque-prevention-incendie.fr/herault/'
+const DFCI_MAP = asset('maps/carroyage-dfci.jpg')
 
 export default function Cartes() {
-  const [zoom, setZoom] = useState<MapItem | null>(null)
+  const [online, setOnline] = useState(
+    typeof navigator === 'undefined' ? true : navigator.onLine,
+  )
+
+  useEffect(() => {
+    const goOnline = () => setOnline(true)
+    const goOffline = () => setOnline(false)
+    window.addEventListener('online', goOnline)
+    window.addEventListener('offline', goOffline)
+    return () => {
+      window.removeEventListener('online', goOnline)
+      window.removeEventListener('offline', goOffline)
+    }
+  }, [])
 
   return (
     <div className="page">
-      <p className="lead">Touchez une carte pour l’agrandir.</p>
+      <section>
+        <h2>Vigilance incendie de forêt</h2>
+        <p className="note">
+          Information journalière des services de l’État de l’Hérault (mise à
+          jour vers 18 h).{' '}
+          <a href={VIGILANCE_URL} target="_blank" rel="noopener noreferrer">
+            Ouvrir le site officiel ↗
+          </a>
+        </p>
+        {online ? (
+          <div className="map-embed">
+            <iframe
+              src={VIGILANCE_URL}
+              title="Carte de vigilance incendie de forêt — Hérault"
+              loading="lazy"
+            />
+          </div>
+        ) : (
+          <div className="callout callout--warn">
+            <div className="callout__title">📡 Connexion requise</div>
+            <p>
+              Cette carte est mise à jour en direct et nécessite une connexion
+              internet.
+            </p>
+          </div>
+        )}
+      </section>
 
-      {MAPS.map((m) => (
-        <div key={m.src} className="map-card">
+      <section>
+        <h2>Carroyage DFCI</h2>
+        <a
+          className="map-card"
+          href={DFCI_MAP}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <img
             className="map-card__img"
-            src={m.src}
-            alt={m.title}
+            src={DFCI_MAP}
+            alt="Carroyage DFCI — échelle 1/25 000"
             loading="lazy"
-            onClick={() => setZoom(m)}
           />
           <div className="map-card__cap">
-            <h3>{m.title}</h3>
-            <p>{m.caption}</p>
+            <h3>Carroyage DFCI</h3>
+            <p>
+              Coordonnées DFCI — échelle 1/25 000 (1 cm = 250 m). Touchez pour
+              ouvrir en plein écran (zoomable).
+            </p>
           </div>
-        </div>
-      ))}
-
-      {zoom && (
-        <ImageViewer
-          src={zoom.src}
-          alt={zoom.title}
-          onClose={() => setZoom(null)}
-        />
-      )}
+        </a>
+      </section>
     </div>
   )
 }
