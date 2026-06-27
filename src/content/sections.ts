@@ -178,6 +178,27 @@ export const SECTIONS: RouteMeta[] = [
     tile: true,
   },
   {
+    id: 'epeleur',
+    path: 'epeleur',
+    title: 'Épeleur radio',
+    short: 'Épeleur',
+    icon: '🔤',
+    accent: 'green',
+    summary:
+      'Tapez un mot ou une plaque, obtenez son épellation phonétique pour la radio.',
+    keywords: [
+      'épeler',
+      'épeleur',
+      'radio',
+      'plaque',
+      'immatriculation',
+      'phonétique',
+      'alphabet',
+      'dicter',
+    ],
+    tile: true,
+  },
+  {
     id: 'glossaire',
     path: 'glossaire',
     title: 'Glossaire des acronymes',

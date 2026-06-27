@@ -32,3 +32,17 @@ export const ALPHABET: PhoneticLetter[] = [
   { letter: 'Y', word: 'Yankee' },
   { letter: 'Z', word: 'Zoulou' },
 ]
+
+/** Chiffres prononcés (pour épeler une immatriculation à la radio). */
+export const DIGITS: string[] = [
+  'Zéro',
+  'Un',
+  'Deux',
+  'Trois',
+  'Quatre',
+  'Cinq',
+  'Six',
+  'Sept',
+  'Huit',
+  'Neuf',
+]
