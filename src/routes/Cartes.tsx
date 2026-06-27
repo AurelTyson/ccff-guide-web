@@ -1,57 +1,59 @@
-import { useState } from 'react'
-import ImageViewer from '../components/ImageViewer'
 import { asset } from '../lib/asset'
 
-interface MapItem {
-  src: string
-  title: string
-  caption: string
-}
-
-const MAPS: MapItem[] = [
-  {
-    src: asset('maps/zones-meteo.jpg'),
-    title: 'Les 8 zones météo de l’Hérault',
-    caption:
-      'Découpage 34-1 à 34-8 utilisé pour le niveau de risque quotidien.',
-  },
-  {
-    src: asset('maps/carroyage-dfci.jpg'),
-    title: 'Carroyage DFCI',
-    caption: 'Coordonnées DFCI — échelle 1/25 000 (1 cm = 250 m).',
-  },
-]
+const VIGILANCE_URL = 'https://www.risque-prevention-incendie.fr/herault/'
+const VIGILANCE_IMG = asset('maps/carte-prevention-incendie.png')
+const DFCI_MAP = asset('maps/carroyage-dfci.jpg')
 
 export default function Cartes() {
-  const [zoom, setZoom] = useState<MapItem | null>(null)
-
   return (
     <div className="page">
-      <p className="lead">Touchez une carte pour l’agrandir.</p>
-
-      {MAPS.map((m) => (
-        <div key={m.src} className="map-card">
+      <section>
+        <h2>Vigilance incendie de forêt</h2>
+        <a
+          className="map-card"
+          href={VIGILANCE_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <img
             className="map-card__img"
-            src={m.src}
-            alt={m.title}
+            src={VIGILANCE_IMG}
+            alt="Carte de vigilance incendie de forêt — Hérault"
             loading="lazy"
-            onClick={() => setZoom(m)}
           />
           <div className="map-card__cap">
-            <h3>{m.title}</h3>
-            <p>{m.caption}</p>
+            <h3>Information journalière (Hérault)</h3>
+            <p>
+              Carte indicative. Touchez pour la vigilance du jour — risque et
+              accès aux massifs — sur le site officiel (mise à jour vers 18 h) ↗
+            </p>
           </div>
-        </div>
-      ))}
+        </a>
+      </section>
 
-      {zoom && (
-        <ImageViewer
-          src={zoom.src}
-          alt={zoom.title}
-          onClose={() => setZoom(null)}
-        />
-      )}
+      <section>
+        <h2>Carroyage DFCI</h2>
+        <a
+          className="map-card"
+          href={DFCI_MAP}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            className="map-card__img"
+            src={DFCI_MAP}
+            alt="Carroyage DFCI — échelle 1/25 000"
+            loading="lazy"
+          />
+          <div className="map-card__cap">
+            <h3>Carroyage DFCI</h3>
+            <p>
+              Coordonnées DFCI — échelle 1/25 000 (1 cm = 250 m). Touchez pour
+              ouvrir en plein écran (zoomable).
+            </p>
+          </div>
+        </a>
+      </section>
     </div>
   )
 }
