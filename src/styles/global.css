@@ -699,6 +699,53 @@ tbody tr:last-child td {
   padding: var(--sp-6) var(--sp-4);
 }
 
+/* ----- Buttons ----- */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  background: var(--c-green);
+  color: #fff;
+  border: none;
+  border-radius: var(--r-md);
+  padding: var(--sp-4) var(--sp-5);
+  font-size: var(--fs-md);
+  font-weight: 700;
+  box-shadow: var(--shadow-sm);
+}
+.btn-primary:active {
+  transform: scale(0.99);
+}
+.btn-block {
+  width: 100%;
+}
+
+/* Disclosure (details/summary) */
+.disclosure {
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  background: var(--surface);
+  padding: var(--sp-3) var(--sp-4);
+}
+.disclosure > summary {
+  cursor: pointer;
+  font-weight: 650;
+  color: var(--c-green-700);
+  list-style: none;
+}
+.disclosure > summary::-webkit-details-marker {
+  display: none;
+}
+.disclosure > summary::after {
+  content: ' ›';
+  display: inline-block;
+  transition: transform 0.15s ease;
+}
+.disclosure[open] > summary::after {
+  transform: rotate(90deg);
+}
+
 /* ----- Misc ----- */
 .note {
   font-size: var(--fs-sm);

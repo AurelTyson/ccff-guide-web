@@ -2,6 +2,7 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { HashRouter } from 'react-router-dom'
 import App from './App'
+import './lib/install' // capture the install prompt event at startup
 import './styles/theme.css'
 import './styles/global.css'
 
