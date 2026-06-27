@@ -214,6 +214,28 @@ export const SECTIONS: RouteMeta[] = [
     tile: true,
   },
   {
+    id: 'reglages',
+    path: 'reglages',
+    title: 'Réglages d’affichage',
+    short: 'Réglages',
+    icon: '🔆',
+    accent: 'green',
+    summary:
+      'Taille du texte et contraste élevé pour une lecture confortable en plein soleil.',
+    keywords: [
+      'réglages',
+      'affichage',
+      'texte',
+      'taille',
+      'contraste',
+      'accessibilité',
+      'lisibilité',
+      'soleil',
+      'grand',
+    ],
+    tile: true,
+  },
+  {
     id: 'a-propos',
     path: 'a-propos',
     title: 'À propos',

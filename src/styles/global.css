@@ -746,6 +746,33 @@ tbody tr:last-child td {
   transform: rotate(90deg);
 }
 
+/* ----- Settings (segmented controls) ----- */
+.setting__label {
+  font-weight: 700;
+  margin-bottom: var(--sp-2);
+}
+.segmented {
+  display: flex;
+  gap: var(--sp-2);
+}
+.segmented button {
+  flex: 1;
+  padding: var(--sp-3) var(--sp-2);
+  border: 1px solid var(--border-strong);
+  background: var(--surface);
+  border-radius: var(--r-sm);
+  font-weight: 650;
+  color: var(--text);
+}
+.segmented button.is-active {
+  background: var(--c-green);
+  border-color: var(--c-green);
+  color: #fff;
+}
+.segmented button:active {
+  transform: scale(0.98);
+}
+
 /* ----- Misc ----- */
 .note {
   font-size: var(--fs-sm);

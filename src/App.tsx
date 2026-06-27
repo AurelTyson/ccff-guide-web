@@ -12,6 +12,7 @@ import Glossaire from './routes/Glossaire'
 import Cartes from './routes/Cartes'
 import Recherche from './routes/Recherche'
 import Installer from './routes/Installer'
+import Reglages from './routes/Reglages'
 import APropos from './routes/APropos'
 
 export default function App() {
@@ -30,6 +31,7 @@ export default function App() {
         <Route path="cartes" element={<Cartes />} />
         <Route path="recherche" element={<Recherche />} />
         <Route path="installer" element={<Installer />} />
+        <Route path="reglages" element={<Reglages />} />
         <Route path="a-propos" element={<APropos />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Route>
