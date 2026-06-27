@@ -11,12 +11,18 @@ html {
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
 }
+html,
+body,
+#root {
+  height: 100%;
+}
 body {
   font-family: var(--font);
   font-size: var(--fs-base);
   line-height: 1.5;
   color: var(--text);
   background: var(--bg);
+  overflow: hidden;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
@@ -41,16 +47,13 @@ a {
 }
 
 /* ----- App shell ----- */
-/* Pin the shell to the real viewport edges (not 100dvh, which can leave a
-   sliver against the iOS safe area / toolbar). Header / scrollable content /
-   in-flow nav as a flex column — nothing position:fixed at bottom:0, so the
-   nav can't drift after the keyboard is dismissed. */
+/* Header / scrollable content / in-flow nav as a flex column filling the
+   viewport via a height:100% chain (html/body/#root). The content area scrolls
+   internally, the nav is a normal in-flow flex child — nothing is
+   position:fixed, so the nav stays flush with no gap and can't drift after the
+   keyboard is dismissed. */
 .app {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  height: 100%;
   display: flex;
   flex-direction: column;
   overflow: hidden;
