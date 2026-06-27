@@ -37,17 +37,24 @@ npm run preview    # sert le build (teste le service worker / mode hors-ligne)
 
 ## Déploiement (GitHub Pages)
 
-Le workflow [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml)
-construit et déploie sur chaque `push` vers `main`.
+La production et les aperçus de PR sont publiés sur la branche **`gh-pages`** :
 
-1. Pousser le dépôt sur GitHub sous le nom **`ccff-guide-web`**.
-2. _Settings → Pages → Build and deployment → Source_ : **GitHub Actions**.
-3. Le site sera servi sur `https://<utilisateur>.github.io/ccff-guide-web/`.
+- [`deploy.yml`](.github/workflows/deploy.yml) — à chaque `push` sur `main`,
+  construit et publie le site à la **racine** de `gh-pages`.
+- [`preview.yml`](.github/workflows/preview.yml) — à chaque pull request,
+  publie un **aperçu** sous `pr-preview/pr-<N>/`, commente le lien sur la PR,
+  et le supprime à la fermeture de la PR.
 
-> Le chemin de base est `/ccff-guide-web/` (voir `base` dans `vite.config.ts`).
-> Si le dépôt porte un autre nom, mettez `base` à jour.
-> Pour un déploiement à la racine (Vercel, Netlify, domaine dédié) :
-> `BASE_PATH=/ npm run build`.
+**Réglage unique** (après le premier déploiement sur `gh-pages`) :
+_Settings → Pages → Build and deployment → Source_ → **Deploy from a branch**
+→ branche `gh-pages` → `/ (root)`.
+
+- Production : `https://<utilisateur>.github.io/ccff-guide-web/`
+- Aperçu PR : `https://<utilisateur>.github.io/ccff-guide-web/pr-preview/pr-<N>/`
+
+> Le chemin de base est `/ccff-guide-web/` (voir `base` dans `vite.config.ts`),
+> surchargé par `BASE_PATH` pour les aperçus. Pour un déploiement à la racine
+> (Vercel, Netlify, domaine dédié) : `BASE_PATH=/ npm run build`.
 
 ## Icônes & cartes
 
