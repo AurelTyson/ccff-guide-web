@@ -28,7 +28,7 @@ export default defineConfig({
         dir: 'ltr',
         display: 'standalone',
         orientation: 'portrait',
-        background_color: '#f6f4ee',
+        background_color: '#ffffff',
         theme_color: '#1f7a3d',
         categories: ['reference', 'utilities', 'education'],
       },
