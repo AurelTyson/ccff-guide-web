@@ -77,7 +77,7 @@ export default function Missions() {
       <p className="note">
         Si la base radio n’est pas opérationnelle, vous pouvez joindre le cadre
         d’astreinte de l’AD au{' '}
-        <a href="tel:+33643991334">06 43 99 13 34</a>.
+        <a href="tel:+33643391334">06 43 39 13 34</a>.
       </p>
     </div>
   )

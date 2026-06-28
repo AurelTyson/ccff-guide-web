@@ -41,8 +41,8 @@ export const RADIO_CONTACTS: Contact[] = [
   },
   {
     label: 'Cadre d’astreinte de l’AD',
-    display: '06 43 99 13 34',
-    tel: '+33643991334',
+    display: '06 43 39 13 34',
+    tel: '+33643391334',
     note: 'Si la base radio n’est pas opérationnelle',
   },
 ]
