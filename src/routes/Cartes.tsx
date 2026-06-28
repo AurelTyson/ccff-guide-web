@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { asset } from '../lib/asset'
 
 const VIGILANCE_URL = 'https://www.risque-prevention-incendie.fr/herault/'
@@ -29,6 +30,24 @@ export default function Cartes() {
             </p>
           </div>
         </a>
+      </section>
+
+      <section>
+        <h2>Carte DFCI interactive</h2>
+        <Link className="map-link" to="/carte-dfci">
+          <span className="map-link__icon" aria-hidden>
+            🧭
+          </span>
+          <span className="map-link__body">
+            <span className="map-link__title">Trouver un carreau sur la carte</span>
+            <span className="map-link__desc">
+              Lisez le carreau DFCI de n’importe quel point. Carte en ligne (IGN).
+            </span>
+          </span>
+          <span className="map-link__go" aria-hidden>
+            ›
+          </span>
+        </Link>
       </section>
 
       <section>
