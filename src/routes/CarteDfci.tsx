@@ -47,6 +47,45 @@ export default function CarteDfci() {
     const grid = L.layerGroup().addTo(map)
     gridRef.current = grid
 
+    // Lambert (m) → [lat, lon] for Leaflet
+    const P = (x: number, y: number): [number, number] => {
+      const p = lambert2eToWgs84(x, y)
+      return [p.lat, p.lon]
+    }
+    const lineOpts = {
+      color: '#c1121f',
+      weight: 1,
+      opacity: 0.5,
+      dashArray: '3',
+      interactive: false,
+    }
+    const labelMarker = (x: number, y: number, html: string, cls: string) =>
+      L.marker(P(x, y), {
+        interactive: false,
+        icon: L.divIcon({ className: cls, html, iconSize: [44, 14] }),
+      }).addTo(grid)
+
+    // The 5 "chasse" sub-zones of a 2 km cell: centre square (5) + 4 corners.
+    const drawSubZones = (cx: number, cy: number) => {
+      const lo = 500
+      const hi = 1500
+      const m = 1000
+      L.polygon(
+        [P(cx + lo, cy + lo), P(cx + hi, cy + lo), P(cx + hi, cy + hi), P(cx + lo, cy + hi)],
+        { ...lineOpts, fill: false },
+      ).addTo(grid)
+      // mid lines, only outside the centre square
+      L.polyline([P(cx + m, cy), P(cx + m, cy + lo)], lineOpts).addTo(grid)
+      L.polyline([P(cx + m, cy + hi), P(cx + m, cy + 2000)], lineOpts).addTo(grid)
+      L.polyline([P(cx, cy + m), P(cx + lo, cy + m)], lineOpts).addTo(grid)
+      L.polyline([P(cx + hi, cy + m), P(cx + 2000, cy + m)], lineOpts).addTo(grid)
+      labelMarker(cx + 300, cy + 1700, '1', 'dfci-sub-label')
+      labelMarker(cx + 1700, cy + 1700, '2', 'dfci-sub-label')
+      labelMarker(cx + 1700, cy + 300, '3', 'dfci-sub-label')
+      labelMarker(cx + 300, cy + 300, '4', 'dfci-sub-label')
+      labelMarker(cx + m, cy + m, '5', 'dfci-sub-label')
+    }
+
     const drawGrid = () => {
       grid.clearLayers()
       const z = map.getZoom()
@@ -72,39 +111,34 @@ export default function CarteDfci() {
       const ny = Math.ceil((maxY - y0) / step)
       if (nx * ny > 400) return // safety cap
       const showLabels = nx * ny <= 220
+      const subZ = step === 2000 && z >= 15 && nx * ny <= 25
 
       for (let i = 0; i < nx; i++) {
         for (let j = 0; j < ny; j++) {
           const cx = x0 + i * step
           const cy = y0 + j * step
-          const c1 = lambert2eToWgs84(cx, cy)
-          const c2 = lambert2eToWgs84(cx + step, cy)
-          const c3 = lambert2eToWgs84(cx + step, cy + step)
-          const c4 = lambert2eToWgs84(cx, cy + step)
           L.polygon(
-            [
-              [c1.lat, c1.lon],
-              [c2.lat, c2.lon],
-              [c3.lat, c3.lon],
-              [c4.lat, c4.lon],
-            ],
-            { color: '#c1121f', weight: 1, opacity: 0.55, fill: false, interactive: false },
+            [P(cx, cy), P(cx + step, cy), P(cx + step, cy + step), P(cx, cy + step)],
+            {
+              color: '#c1121f',
+              weight: step === 2000 ? 1.5 : 1,
+              opacity: 0.6,
+              fill: false,
+              interactive: false,
+            },
           ).addTo(grid)
+
+          if (subZ) drawSubZones(cx, cy)
 
           if (showLabels) {
             const code = lambertToDFCI(cx + step / 2, cy + step / 2)
             if (code) {
-              const ctr = lambert2eToWgs84(cx + step / 2, cy + step / 2)
               const txt =
                 step === 2000 ? code.code2km.slice(4) : code.code2km.slice(0, 4)
-              L.marker([ctr.lat, ctr.lon], {
-                interactive: false,
-                icon: L.divIcon({
-                  className: 'dfci-cell-label',
-                  html: txt,
-                  iconSize: [44, 14],
-                }),
-              }).addTo(grid)
+              // at sub-zone zoom, lift the cell code to the top edge so it
+              // doesn't collide with the centre "5"
+              if (subZ) labelMarker(cx + step / 2, cy + 1880, txt, 'dfci-cell-label')
+              else labelMarker(cx + step / 2, cy + step / 2, txt, 'dfci-cell-label')
             }
           }
         }
