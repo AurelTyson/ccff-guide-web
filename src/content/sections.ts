@@ -42,6 +42,28 @@ export const SECTIONS: RouteMeta[] = [
     tile: true,
   },
   {
+    id: 'position',
+    path: 'position',
+    title: 'Ma position',
+    short: 'Ma position',
+    icon: '📍',
+    accent: 'red',
+    summary:
+      'Votre position GPS et le carreau DFCI à transmettre aux secours.',
+    keywords: [
+      'position',
+      'GPS',
+      'DFCI',
+      'carreau',
+      'coordonnées',
+      'localisation',
+      'où suis-je',
+      'point de transit',
+      'secours',
+    ],
+    tile: true,
+  },
+  {
     id: 'missions',
     path: 'missions',
     title: 'Vos missions',

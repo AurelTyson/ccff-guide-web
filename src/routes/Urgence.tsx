@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import EmergencyBar from '../components/EmergencyBar'
 import PhoneLink from '../components/PhoneLink'
 import { RADIO_CONTACTS } from '../content/contacts'
@@ -6,6 +7,10 @@ export default function Urgence() {
   return (
     <div className="page">
       <EmergencyBar />
+
+      <Link className="btn-primary btn-block" to="/position">
+        📍 Donner ma position (GPS + DFCI)
+      </Link>
 
       <div className="steps">
         <div className="step">
