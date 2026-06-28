@@ -4,6 +4,7 @@ import { HashRouter } from 'react-router-dom'
 import App from './App'
 import './lib/install' // capture the install prompt event at startup
 import './lib/settings' // apply saved display preferences before first paint
+import 'leaflet/dist/leaflet.css'
 import './styles/theme.css'
 import './styles/global.css'
 

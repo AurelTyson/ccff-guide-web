@@ -198,6 +198,28 @@ export const SECTIONS: RouteMeta[] = [
     tile: true,
   },
   {
+    id: 'carte-dfci',
+    path: 'carte-dfci',
+    title: 'Carte DFCI interactive',
+    short: 'Carte DFCI',
+    icon: '🧭',
+    accent: 'green',
+    summary:
+      'Carte interactive : lisez le carreau DFCI de n’importe quel point (en ligne).',
+    keywords: [
+      'carte',
+      'interactive',
+      'DFCI',
+      'carreau',
+      'IGN',
+      'localiser',
+      'point',
+      'massif',
+    ],
+    // Reached from the Cartes tab, not a Home tile.
+    tile: false,
+  },
+  {
     id: 'alphabet',
     path: 'alphabet',
     title: 'Alphabet phonétique',
