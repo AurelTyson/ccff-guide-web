@@ -2,6 +2,7 @@ import { Routes, Route, Navigate } from 'react-router-dom'
 import AppShell from './components/AppShell'
 import Home from './routes/Home'
 import Urgence from './routes/Urgence'
+import Position from './routes/Position'
 import Missions from './routes/Missions'
 import Debroussaillement from './routes/Debroussaillement'
 import EmploiDuFeu from './routes/EmploiDuFeu'
@@ -22,6 +23,7 @@ export default function App() {
       <Route element={<AppShell />}>
         <Route index element={<Home />} />
         <Route path="urgence" element={<Urgence />} />
+        <Route path="position" element={<Position />} />
         <Route path="missions" element={<Missions />} />
         <Route path="debroussaillement" element={<Debroussaillement />} />
         <Route path="emploi-du-feu" element={<EmploiDuFeu />} />
