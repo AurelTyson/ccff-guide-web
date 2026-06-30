@@ -37,6 +37,7 @@ export const RISK_LEVELS: RiskLevel[] = [
     level: 4,
     color: 'Orange',
     cssVar: 'var(--risk-4)',
+    darkText: true,
     name: 'Sévère',
     definition:
       'Zone sensible au feu : la probabilité de propagation d’un feu est fonction du vent et de l’humidité de l’air.',

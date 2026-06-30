@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import * as L from 'leaflet'
+import 'leaflet/dist/leaflet.css' // loaded with this lazy route, not the shell
 import {
   lambert2eToWgs84,
   lambertToDFCI,

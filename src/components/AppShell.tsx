@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { Suspense, useEffect, useRef } from 'react'
 import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 import BottomNav from './BottomNav'
 import UpdateToast from './UpdateToast'
@@ -30,12 +30,14 @@ export default function AppShell() {
               ‹
             </button>
           )}
-          <span className="header__title">{title}</span>
+          <h1 className="header__title">{title}</h1>
         </div>
       </header>
 
       <main className="main" ref={mainRef}>
-        <Outlet />
+        <Suspense fallback={<p className="empty">Chargement…</p>}>
+          <Outlet />
+        </Suspense>
       </main>
 
       <UpdateToast />
