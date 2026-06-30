@@ -2,8 +2,8 @@ import { Link } from 'react-router-dom'
 import { asset } from '../lib/asset'
 
 const VIGILANCE_URL = 'https://www.risque-prevention-incendie.fr/herault/'
-const VIGILANCE_IMG = asset('maps/carte-prevention-incendie.png')
-const DFCI_MAP = asset('maps/carroyage-dfci.jpg')
+const VIGILANCE_IMG = asset('maps/carte-prevention-incendie.webp')
+const DFCI_MAP = asset('maps/carroyage-dfci.webp')
 
 export default function Cartes() {
   return (

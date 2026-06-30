@@ -1,4 +1,4 @@
-import { lazy, Suspense } from 'react'
+import { lazy } from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
 import AppShell from './components/AppShell'
 import Home from './routes/Home'
@@ -13,13 +13,15 @@ import AlphabetPhonetique from './routes/AlphabetPhonetique'
 import Epeleur from './routes/Epeleur'
 import Glossaire from './routes/Glossaire'
 import Cartes from './routes/Cartes'
-import Recherche from './routes/Recherche'
 
-// Leaflet is heavy and online-only — load it on demand.
+// Secondary / heavy routes — code-split out of the main bundle. CarteDfci pulls
+// in Leaflet (online-only); Recherche pulls in Fuse.js. AppShell hosts the
+// shared <Suspense> boundary, so no per-route fallback is needed here.
 const CarteDfci = lazy(() => import('./routes/CarteDfci'))
-import Installer from './routes/Installer'
-import Reglages from './routes/Reglages'
-import APropos from './routes/APropos'
+const Recherche = lazy(() => import('./routes/Recherche'))
+const Installer = lazy(() => import('./routes/Installer'))
+const Reglages = lazy(() => import('./routes/Reglages'))
+const APropos = lazy(() => import('./routes/APropos'))
 
 export default function App() {
   return (
@@ -37,14 +39,7 @@ export default function App() {
         <Route path="epeleur" element={<Epeleur />} />
         <Route path="glossaire" element={<Glossaire />} />
         <Route path="cartes" element={<Cartes />} />
-        <Route
-          path="carte-dfci"
-          element={
-            <Suspense fallback={<p className="empty">Chargement de la carte…</p>}>
-              <CarteDfci />
-            </Suspense>
-          }
-        />
+        <Route path="carte-dfci" element={<CarteDfci />} />
         <Route path="recherche" element={<Recherche />} />
         <Route path="installer" element={<Installer />} />
         <Route path="reglages" element={<Reglages />} />
