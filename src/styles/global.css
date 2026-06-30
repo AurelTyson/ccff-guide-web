@@ -33,12 +33,14 @@ svg {
   display: block;
   max-width: 100%;
 }
-button {
+/* :where() keeps these element resets at zero specificity so component
+   class rules always win without specificity battles. */
+:where(button) {
   font: inherit;
   color: inherit;
   cursor: pointer;
 }
-a {
+:where(a) {
   color: var(--c-green-700);
   text-decoration: none;
 }
@@ -66,7 +68,7 @@ a {
   flex: none;
   z-index: 20;
   background: var(--c-green);
-  color: #fff;
+  color: var(--text-on-color);
   padding-top: var(--safe-top);
   box-shadow: var(--shadow-sm);
 }
@@ -96,7 +98,7 @@ a {
   margin-left: -8px;
   border: none;
   background: transparent;
-  color: #fff;
+  color: var(--text-on-color);
   border-radius: 50%;
   font-size: 1.5rem;
   line-height: 1;
@@ -189,7 +191,7 @@ a {
   font-weight: 700;
 }
 .page p {
-  color: #2b2d28;
+  color: var(--text-secondary);
 }
 .page ul,
 .page ol {
@@ -205,6 +207,28 @@ a {
   color: var(--text-muted);
 }
 
+/* ----- Surface cards -----
+   Shared "surface + hairline" chrome for the standard cards. Each card keeps
+   its own radius / shadow / padding / layout below; accent variants
+   (.callout--alert, .call--urgent, .tile[data-accent], …) override background
+   and border afterwards. */
+.tile,
+.step,
+.callout,
+.call,
+.risk__row,
+.alpha__item,
+.gloss__item,
+.plane,
+.cal__key,
+.map-card,
+.map-link,
+.result,
+.disclosure {
+  background: var(--surface);
+  border: 1px solid var(--border);
+}
+
 /* ----- Cards / tiles (home) ----- */
 .tiles {
   display: grid;
@@ -217,8 +241,6 @@ a {
   gap: var(--sp-2);
   padding: var(--sp-4);
   min-height: 116px;
-  background: var(--surface);
-  border: 1px solid var(--border);
   border-radius: var(--r-md);
   box-shadow: var(--shadow-sm);
   color: var(--text);
@@ -260,34 +282,17 @@ a {
   margin-top: 0;
 }
 .tile[data-accent="red"] {
-  border-color: #ecc4c7;
+  border-color: var(--c-red-100);
   background: var(--c-red-50);
 }
 .tile[data-accent="red"] .tile__title {
   color: var(--c-red-700);
 }
 
-/* ----- Section header (page intro) ----- */
-.section-head {
-  display: flex;
-  align-items: center;
-  gap: var(--sp-3);
-}
-.section-head__icon {
-  font-size: 2rem;
-  line-height: 1;
-}
-.section-head__sub {
-  font-size: var(--fs-sm);
-  color: var(--text-muted);
-}
-
 /* ----- Callout boxes ----- */
 .callout {
   border-radius: var(--r-md);
   padding: var(--sp-4);
-  border: 1px solid var(--border);
-  background: var(--surface);
 }
 .callout__title {
   font-weight: 750;
@@ -298,29 +303,29 @@ a {
 }
 .callout--alert {
   background: var(--c-red-50);
-  border-color: #ecc4c7;
+  border-color: var(--c-red-100);
 }
 .callout--alert .callout__title {
   color: var(--c-red-700);
 }
 .callout--warn {
-  background: #fff6e6;
-  border-color: #f3dcab;
+  background: var(--c-amber-50);
+  border-color: var(--c-amber-100);
 }
 .callout--warn .callout__title {
-  color: #9a6200;
+  color: var(--c-amber-800);
 }
 .callout--info {
   background: var(--c-blue-50);
-  border-color: #c5ddf5;
+  border-color: var(--c-blue-100);
 }
 .callout--info .callout__title {
-  color: #1565c0;
+  color: var(--c-blue-800);
 }
 .callout--rule {
   background: var(--c-red);
   border-color: var(--c-red);
-  color: #fff;
+  color: var(--text-on-color);
   font-weight: 700;
   text-align: center;
   font-size: var(--fs-md);
@@ -337,8 +342,6 @@ a {
   gap: var(--sp-3);
 }
 .step {
-  background: var(--surface);
-  border: 1px solid var(--border);
   border-radius: var(--r-md);
   padding: var(--sp-4);
   box-shadow: var(--shadow-sm);
@@ -372,8 +375,6 @@ a {
   gap: var(--sp-3);
   padding: var(--sp-3) var(--sp-4);
   border-radius: var(--r-md);
-  background: var(--surface);
-  border: 1px solid var(--border);
   box-shadow: var(--shadow-sm);
   color: var(--text);
   text-decoration: none;
@@ -407,13 +408,13 @@ a {
 .call--urgent {
   background: var(--c-red);
   border-color: var(--c-red);
-  color: #fff;
+  color: var(--text-on-color);
 }
 .call--urgent .call__note {
   color: rgba(255, 255, 255, 0.85);
 }
 .call--urgent .call__go {
-  color: #fff;
+  color: var(--text-on-color);
 }
 
 /* ----- Tables ----- */
@@ -454,20 +455,18 @@ tbody tr:last-child td {
   grid-template-columns: 52px 1fr;
   border-radius: var(--r-sm);
   overflow: hidden;
-  border: 1px solid var(--border);
-  background: var(--surface);
 }
 .risk__badge {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  color: #fff;
+  color: var(--text-on-color);
   font-weight: 800;
   font-size: var(--fs-lg);
 }
 .risk__badge[data-dark="true"] {
-  color: #1b1c1a;
+  color: var(--text);
 }
 .risk__body {
   padding: var(--sp-3);
@@ -480,7 +479,7 @@ tbody tr:last-child td {
 }
 .risk__def {
   font-size: var(--fs-sm);
-  color: #2b2d28;
+  color: var(--text-secondary);
 }
 
 /* Alphabet grid */
@@ -495,8 +494,6 @@ tbody tr:last-child td {
   gap: var(--sp-2);
   min-width: 0;
   padding: var(--sp-2) var(--sp-3);
-  background: var(--surface);
-  border: 1px solid var(--border);
   border-radius: var(--r-sm);
 }
 .alpha__letter {
@@ -515,8 +512,6 @@ tbody tr:last-child td {
   gap: var(--sp-2);
 }
 .gloss__item {
-  background: var(--surface);
-  border: 1px solid var(--border);
   border-radius: var(--r-sm);
   padding: var(--sp-3);
 }
@@ -526,7 +521,7 @@ tbody tr:last-child td {
 }
 .gloss__def {
   font-size: var(--fs-sm);
-  color: #2b2d28;
+  color: var(--text-secondary);
 }
 
 /* Calendar (emploi du feu) */
@@ -546,7 +541,7 @@ tbody tr:last-child td {
   font-weight: 700;
   text-align: center;
   padding: var(--sp-2) 0;
-  color: #fff;
+  color: var(--text-on-color);
   border-right: 1px solid rgba(255, 255, 255, 0.35);
 }
 .cal__month:last-child {
@@ -562,8 +557,6 @@ tbody tr:last-child td {
   align-items: flex-start;
   padding: var(--sp-3);
   border-radius: var(--r-sm);
-  border: 1px solid var(--border);
-  background: var(--surface);
 }
 .cal__swatch {
   flex: none;
@@ -590,8 +583,6 @@ tbody tr:last-child td {
   display: flex;
   align-items: center;
   gap: var(--sp-3);
-  background: var(--surface);
-  border: 1px solid var(--border);
   border-radius: var(--r-sm);
   padding: var(--sp-3) var(--sp-4);
 }
@@ -612,8 +603,6 @@ tbody tr:last-child td {
 
 /* ----- Maps ----- */
 .map-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
   border-radius: var(--r-md);
   overflow: hidden;
   box-shadow: var(--shadow-sm);
@@ -622,7 +611,7 @@ tbody tr:last-child td {
   width: 100%;
   height: auto;
   display: block;
-  background: #eee;
+  background: var(--map-bg);
 }
 .map-card__cap {
   padding: var(--sp-3) var(--sp-4);
@@ -641,8 +630,6 @@ tbody tr:last-child td {
   align-items: center;
   gap: var(--sp-3);
   padding: var(--sp-4);
-  background: var(--surface);
-  border: 1px solid var(--border);
   border-radius: var(--r-md);
   box-shadow: var(--shadow-sm);
   color: var(--text);
@@ -680,7 +667,7 @@ tbody tr:last-child td {
   border-radius: var(--r-md);
   overflow: hidden;
   border: 1px solid var(--border);
-  background: #e8eef0;
+  background: var(--map-canvas-bg);
 }
 .map-canvas {
   position: absolute;
@@ -719,9 +706,9 @@ tbody tr:last-child td {
   left: 0;
   right: 0;
   z-index: 1100;
-  background: #fff6e6;
-  color: #9a6200;
-  border-bottom: 1px solid #f3dcab;
+  background: var(--c-amber-50);
+  color: var(--c-amber-800);
+  border-bottom: 1px solid var(--c-amber-100);
   padding: var(--sp-2) var(--sp-3);
   font-size: var(--fs-sm);
   text-align: center;
@@ -739,7 +726,7 @@ tbody tr:last-child td {
   text-shadow: 0 0 3px #fff, 0 0 3px #fff;
 }
 .dfci-cell-label {
-  color: #c1121f;
+  color: var(--c-red);
   font-weight: 700;
   font-size: 11px;
   line-height: 1;
@@ -749,7 +736,7 @@ tbody tr:last-child td {
   text-shadow: 0 0 2px #fff, 0 0 2px #fff, 0 0 2px #fff;
 }
 .dfci-sub-label {
-  color: #e0566b;
+  color: var(--c-red-400);
   font-weight: 700;
   font-size: 10px;
   line-height: 1;
@@ -782,8 +769,6 @@ tbody tr:last-child td {
 }
 .result {
   display: block;
-  background: var(--surface);
-  border: 1px solid var(--border);
   border-radius: var(--r-md);
   padding: var(--sp-3) var(--sp-4);
   color: var(--text);
@@ -816,7 +801,7 @@ tbody tr:last-child td {
   justify-content: center;
   gap: var(--sp-2);
   background: var(--c-green);
-  color: #fff;
+  color: var(--text-on-color);
   border: none;
   border-radius: var(--r-md);
   padding: var(--sp-4) var(--sp-5);
@@ -833,9 +818,7 @@ tbody tr:last-child td {
 
 /* Disclosure (details/summary) */
 .disclosure {
-  border: 1px solid var(--border);
   border-radius: var(--r-md);
-  background: var(--surface);
   padding: var(--sp-3) var(--sp-4);
 }
 .disclosure > summary {
@@ -877,7 +860,7 @@ tbody tr:last-child td {
 .segmented button.is-active {
   background: var(--c-green);
   border-color: var(--c-green);
-  color: #fff;
+  color: var(--text-on-color);
 }
 .segmented button:active {
   transform: scale(0.98);
@@ -887,7 +870,7 @@ tbody tr:last-child td {
 .pos-dfci {
   text-align: center;
   background: var(--c-red-50);
-  border: 1px solid #ecc4c7;
+  border: 1px solid var(--c-red-100);
   border-radius: var(--r-md);
   padding: var(--sp-4);
 }
@@ -982,7 +965,7 @@ tbody tr:last-child td {
   align-items: center;
   gap: var(--sp-3);
   background: var(--c-green-800);
-  color: #fff;
+  color: var(--text-on-color);
   padding: var(--sp-3) var(--sp-4);
   border-radius: var(--r-md);
   box-shadow: var(--shadow-md);
@@ -991,7 +974,7 @@ tbody tr:last-child td {
 }
 .update-toast button {
   border: none;
-  background: #fff;
+  background: var(--surface);
   color: var(--c-green-800);
   font-weight: 700;
   border-radius: 999px;

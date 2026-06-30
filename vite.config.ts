@@ -19,6 +19,9 @@ export default defineConfig({
         overrideManifestIcons: true,
       },
       manifest: {
+        // Stable app identity, independent of start_url. Tracks `base` so it
+        // stays correct for both the GitHub Pages subpath and root deploys.
+        id: base,
         name: 'Guide pratique du Bénévole CCFF',
         short_name: 'Guide CCFF',
         description:
@@ -31,6 +34,28 @@ export default defineConfig({
         background_color: '#ffffff',
         theme_color: '#1f7a3d',
         categories: ['reference', 'utilities', 'education'],
+        // Long-press the installed icon → jump straight to the field-critical
+        // screens. URLs carry the HashRouter fragment so they deep-link offline.
+        shortcuts: [
+          {
+            name: 'Urgence & départ de feu',
+            short_name: 'Urgence',
+            description: 'Numéros d’urgence et conduite à tenir',
+            url: `${base}#/urgence`,
+          },
+          {
+            name: 'Ma position (GPS + DFCI)',
+            short_name: 'Ma position',
+            description: 'Coordonnées à transmettre aux secours',
+            url: `${base}#/position`,
+          },
+          {
+            name: 'Rechercher dans le guide',
+            short_name: 'Recherche',
+            description: 'Trouver une rubrique, un acronyme, un numéro',
+            url: `${base}#/recherche`,
+          },
+        ],
       },
       workbox: {
         // Precache the whole shell + the map images so every section works offline.
