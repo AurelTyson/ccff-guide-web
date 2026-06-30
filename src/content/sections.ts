@@ -168,6 +168,7 @@ export const SECTIONS: RouteMeta[] = [
       'canadair',
       'dash',
       'tracker',
+      'thrush',
       'air tractor',
       'bombardier',
       'SDIS',

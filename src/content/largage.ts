@@ -5,7 +5,7 @@ export interface Aircraft {
 }
 
 export const AIRCRAFT: Aircraft[] = [
-  { name: 'Air Tractor 802 F', fleet: 'Cellule départementale', load: '3 t' },
+  { name: 'Thrush 710T', fleet: 'Cellule départementale', load: '1,5 t' },
   { name: 'Tracker CS2F', fleet: 'Sécurité civile', load: '3,5 t' },
   { name: 'Canadair CL415', fleet: 'Sécurité civile', load: '6 t' },
   { name: 'Dash Q400', fleet: 'Sécurité civile', load: '10 t' },
